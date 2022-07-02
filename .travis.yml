@@ -5,20 +5,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t snehasis/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t connect2snehasis/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true snehasis/react-test npm test
+  - docker run -e CI=true connect2snehasis/react-test npm test
 
 after_success:
-  - docker build -t snehasis/multi-client ./client
-  - docker build -t snehasis/multi-nginx ./nginx
-  - docker build -t snehasis/multi-server ./server
-  - docker build -t snehasis/multi-worker ./worker
+  - docker build -t connect2snehasis/multi-client ./client
+  - docker build -t connect2snehasis/multi-nginx ./nginx
+  - docker build -t connect2snehasis/multi-server ./server
+  - docker build -t connect2snehasis/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push snehasis/multi-client
-  - docker push snehasis/multi-nginx
-  - docker push snehasis/multi-server
-  - docker push snehasis/multi-worker
+  - docker push connect2snehasis/multi-client
+  - docker push connect2snehasis/multi-nginx
+  - docker push connect2snehasis/multi-server
+  - docker push connect2snehasis/multi-worker
